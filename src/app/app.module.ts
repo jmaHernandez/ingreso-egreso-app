@@ -6,6 +6,11 @@ import { RouterModule } from '@angular/router';
 // environment
 import { environment } from '../environments/environment';
 
+// Ngrx
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppReducers } from './app.reducers';
+
 // Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -15,6 +20,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
 
+// Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -46,9 +52,14 @@ import { AppRoutes } from './app.routes';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(AppRoutes),
+    StoreModule.forRoot(AppReducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule  
   ],
   providers: [
     AuthService,
