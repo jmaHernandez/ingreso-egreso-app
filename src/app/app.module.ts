@@ -1,6 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
+// environment
+import { environment } from '../environments/environment';
+
+// Firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+// Services
+import { AuthService } from './auth/auth.service';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -13,6 +26,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
+// Routes
 import { AppRoutes } from './app.routes';
 
 @NgModule({
@@ -30,9 +44,18 @@ import { AppRoutes } from './app.routes';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(AppRoutes)
+    FormsModule,
+    RouterModule.forRoot(AppRoutes),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthService,
+    AuthGuardService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
