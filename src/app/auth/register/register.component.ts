@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   styles: []
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
   isLoading: boolean;
 

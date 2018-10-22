@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 import { RouterModule } from '@angular/router';
 
 // environment
@@ -19,6 +20,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // Services
 import { AuthService } from './auth/auth.service';
 import { AuthGuardService } from './auth/auth-guard.service';
+import { IngresoEgresoService } from './ingreso-egreso/ingreso-egreso.service';
+
+// Pipes
+import { OrdenIngresoEgresoPipe } from './ingreso-egreso/orden-ingreso-egreso.pipe';
 
 // Components
 import { AppComponent } from './app.component';
@@ -46,11 +51,14 @@ import { AppRoutes } from './app.routes';
     DetalleComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    OrdenIngresoEgresoPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
+    ChartsModule,
     RouterModule.forRoot(AppRoutes),
     StoreModule.forRoot(AppReducers),
     StoreDevtoolsModule.instrument({
@@ -63,7 +71,8 @@ import { AppRoutes } from './app.routes';
   ],
   providers: [
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    IngresoEgresoService
   ],
   bootstrap: [
     AppComponent
