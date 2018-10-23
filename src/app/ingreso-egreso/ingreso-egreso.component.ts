@@ -2,7 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.reducers';
+// import { AppState } from '../app.reducers';
+import * as fromIngresoEgreso from '../ingreso-egreso/ingreso-egreso.reducer';
+
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../shared/ui.actions';
 
 import { IngresoEgresoService } from './ingreso-egreso.service';
@@ -26,7 +28,7 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
   forma: FormGroup;
   tipo: string = 'ingreso';
 
-  constructor(private store: Store<AppState>, private ies: IngresoEgresoService) { }
+  constructor(private store: Store<fromIngresoEgreso.AppState>, private ies: IngresoEgresoService) { }
 
   ngOnInit() {
     this.subscription = this.store.select('ui').subscribe((ui) => {

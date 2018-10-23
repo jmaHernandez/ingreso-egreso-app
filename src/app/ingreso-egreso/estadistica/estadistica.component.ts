@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.reducers';
-import { Subscription } from 'rxjs';
+// import { AppState } from '../../app.reducers';
+import * as fromIngresoEgreso from '../ingreso-egreso.reducer';
+
 import { IngresoEgreso } from '../ingreso-egreso.model';
+
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-estadistica',
@@ -23,7 +26,7 @@ export class EstadisticaComponent implements OnInit {
   public doughnutChartColors: Array<any> = [{ backgroundColor: ['#28a745', '#dc3545']}];
   public doughnutChartData: number[] = [];
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<fromIngresoEgreso.AppState>) { }
 
   ngOnInit() {
     this.subscription = this.store.select('ingresoEgreso').subscribe(
